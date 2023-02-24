@@ -6,10 +6,10 @@ namespace Cepdi.Models.Models
     {
         public Response()
         {
-            Succes = false;
+            Success = false;
         }
 
-        public bool Succes { get; set; }
+        public bool Success { get; set; }
         public Errors Errors { get; set; }
         public IEnumerable<T> DataList { get; set; }
         public T Data { get; set; }

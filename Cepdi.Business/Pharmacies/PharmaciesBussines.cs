@@ -29,7 +29,7 @@ namespace Cepdi.Business.Pharmacies
 
 
                 return new Response<PharmaciesModel>() { 
-                    Succes = (result != null), 
+                    Success = (result != null), 
                     Data = result,
                     Message = (result != null) ? string.Empty : "No se encontraron coincidencias"
                 };

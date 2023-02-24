@@ -43,7 +43,7 @@ namespace Cepdi.Business.Users
                     };
 
                     return new Response<LoginResponse> {
-                        Succes = true,
+                        Success = true,
                         Data = loginResponse, 
                         Message = (result != null) ? string.Empty : "No se encontraton coincidencias"
                     };

@@ -43,6 +43,7 @@ namespace Cepdi.WebApi.Controllers
 
         // POST api/<MedicinesController>
         [HttpPost]
+        [Route("Create")]
         public async Task<Response<bool>> Post([FromBody] CreateMedicineModel model)
         => await _medicinesBusiness.Create(model);
 

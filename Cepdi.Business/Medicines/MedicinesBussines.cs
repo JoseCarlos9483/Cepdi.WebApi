@@ -34,6 +34,7 @@ namespace Cepdi.Business.Medicines
         {
             try
             {
+                model.Habilitado = 1;
                 var validatinPharmacy = _pharmaciesBussines.Get(model.IdFarmaceutica);
                 if (validatinPharmacy == null)
                 {
@@ -46,11 +47,11 @@ namespace Cepdi.Business.Medicines
 
                 if (!validation.Success)
                 {
-                    return new Response<bool> { Succes = true, Message = validation.Message };
+                    return new Response<bool> { Success = true, Message = validation.Message };
                 }
 
                 var create = await _medicinesData.Create(model);
-                return new Response<bool> { Succes = true, Data = create };
+                return new Response<bool> { Success = true, Data = create, Message = "Se creo correctamente"};
             }
             catch (System.Exception ex)
             {
@@ -79,7 +80,7 @@ namespace Cepdi.Business.Medicines
             try
             {
                 var result = await _medicinesData.Delete(id);
-                return new Response<bool> { Succes = true, Data = result };
+                return new Response<bool> { Success = true, Data = result, Message =  result ? string.Empty : "No se puedo realizar la acción" };
             }
             catch (System.Exception ex)
             {
@@ -109,7 +110,7 @@ namespace Cepdi.Business.Medicines
                 var result = await _medicinesData.Get(id);
                 return new Response<MedicineDTo>() 
                 {
-                    Succes = true,
+                    Success = true,
                     Data = _mapper.Map<MedicineDTo>(result)
                 };
             }
@@ -161,7 +162,7 @@ namespace Cepdi.Business.Medicines
                 var MedicineDTo = _mapper.Map<MedicineModel>(model);
                 var result = await _medicinesData.Update(MedicineDTo);
 
-                return new Response<bool> { Succes = true, Data = result };
+                return new Response<bool> { Success = true, Data = result, Message = result ? string.Empty : "Ocurrio un error al realizar la acción"};
             }
             catch (System.Exception ex)
             {

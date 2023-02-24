@@ -55,7 +55,8 @@ namespace Cepdi.WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
