@@ -36,6 +36,7 @@ namespace Cepdi.WebApi
             });
 
             services.ConfigureDependencies();
+            services.ConfigureJWT(Configuration);
 
             services.ConfigureCors();
         }

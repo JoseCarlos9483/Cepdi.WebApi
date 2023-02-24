@@ -20,9 +20,15 @@ namespace Cepdi.Data.Medicines
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Crear un medicamento
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Retorna un true si creo el modelo</returns>
         public async Task<bool> Create(CreateMedicineModel model)
         {
             List<MedicineModel> listRestul = GetListMedicine();
+            listRestul.OrderBy(x => x.IIDMedicamento);
 
             var newId = (listRestul.Last().IIDMedicamento) + 1;
 
@@ -35,6 +41,11 @@ namespace Cepdi.Data.Medicines
             return true;
         }
 
+        /// <summary>
+        /// Elimina un medicamento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returna true si eliino el medicamento</returns>
         public async Task<bool> Delete(int id)
         {
             bool success = false;
@@ -55,6 +66,11 @@ namespace Cepdi.Data.Medicines
             return success;
         }
 
+        /// <summary>
+        /// Obtiene un medicamento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Un la informacion del medicamento</returns>
         public async Task<MedicineModel> Get(int id)
         {
             List<MedicineModel> listRestul = GetListMedicine();
@@ -64,6 +80,11 @@ namespace Cepdi.Data.Medicines
                 
         }
 
+        /// <summary>
+        /// Obtiene los registros por paginacion
+        /// </summary>
+        /// <param name="model">Modelo con el request</param>
+        /// <returns>los registros y el total</returns>
         public async Task<(int totalRecord, IEnumerable<MedicineModel> registers)> GetAll(ShowTableMedicinesModel model)
         {
 
@@ -92,31 +113,42 @@ namespace Cepdi.Data.Medicines
             return  (countRegisters, listRestul);
         }
 
+
+        /// <summary>
+        /// Actualiza un medicamento
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Retorna el modelo con la nueva informacion que se actualizo</returns>
         public async Task<bool> Update(MedicineModel model)
         {
             bool success = false;
 
             List<MedicineModel> listRestul = GetListMedicine();
 
-            var updateModel = listRestul.Where(i => i.IIDMedicamento == model.IIDMedicamento).FirstOrDefault();
 
-            if (updateModel != null) {
-                updateModel.Nombre = model.Nombre;
-                updateModel.Concentracion = model.Concentracion;
-                updateModel.IIdFarmaFarmaceutica = model.IIdFarmaFarmaceutica;
-                updateModel.Precio = model.Precio;
-                updateModel.Stock = model.Stock;
-                updateModel.Presentacion = model.Presentacion;
-                updateModel.BHabilitado = model.BHabilitado;
+            if (listRestul.Where(i => i.IIDMedicamento == model.IIDMedicamento).FirstOrDefault() != null) {
+                var newModel = new MedicineModel
+                {
+                    IIDMedicamento = model.IIDMedicamento,
+                    Nombre = model.Nombre,
+                    Concentracion = model.Concentracion,
+                    IIdFarmaFarmaceutica = model.IIdFarmaFarmaceutica,
+                    Precio = model.Precio,
+                    Stock = model.Stock,
+                    Presentacion = model.Presentacion,
+                    BHabilitado = model.BHabilitado
+                };
 
                 var objectRemove = listRestul.Where(x => x.IIDMedicamento == model.IIDMedicamento).First();
                 
                 listRestul.Remove(objectRemove);
 
-                listRestul.Add(updateModel);
-                listRestul.OrderBy(x => x.IIdFarmaFarmaceutica);
+                listRestul.Add(newModel);
+               
 
-                WriteFile(listRestul);
+                var newList = listRestul.OrderBy(x => x.IIDMedicamento).ToList();
+
+                WriteFile(newList);
 
                 success = true;
             }

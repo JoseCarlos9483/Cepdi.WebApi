@@ -1,4 +1,5 @@
-﻿using Cepdi.Models.Interfaces.Users;
+﻿using Cepdi.Business.Jwt;
+using Cepdi.Models.Interfaces.Users;
 using Cepdi.Models.Models;
 using Cepdi.Models.Models.Users;
 using System;
@@ -15,10 +16,12 @@ namespace Cepdi.Business.Users
         /// Insumos
         /// </summary>
         private IUsersData _usersData;
+        private TokenService _tokenService;
 
-        public UsersBussines(IUsersData usersData)
+        public UsersBussines(IUsersData usersData, TokenService tokenService)
         {
             _usersData = usersData;
+            _tokenService = tokenService;
         }
 
         /// <summary>
@@ -35,11 +38,15 @@ namespace Cepdi.Business.Users
                 if(validation.success){
 
                     var result = _usersData.Get(loginRequest);
-                    
+                    string token = string.Empty;
+                    if (result != null) {
+                        token = _tokenService.GenerarToken(result);
+
+                    }
                     LoginResponse loginResponse = new LoginResponse()
                     {
                         Success = (result != null),
-                        Token = ""
+                        Token = token
                     };
 
                     return new Response<LoginResponse> {

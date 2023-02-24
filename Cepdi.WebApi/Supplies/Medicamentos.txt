@@ -9,8 +9,4 @@ IIDMEDICAMENTO|NOMBRE|CONCENTRACION|IIDFORMAFARMACEUTICA|PRECIO|STOCK|PRESENTACI
 8|AMOXICILINA|20MG|2|10.00|5|SOBRE|1
 9|Nuevo|50|2|15.50|250|Baso|1
 10|Tempre|50mgq|3|159.00|650|250|1
-11|prueba|10gm|1|1.2|2|bebible|1
-12|EstoEsUnaPrueba|11gr|2|1.11|1|En pastillas|1
-13|prueba12|10gr|2|1|1|pastilals|1
-14|dsa|dsa|1|1|1|sa|1
-15|esto es una prueba|10gr|2|1|1|pastillas|1
+11|EstoEsUnaPrueba|11gr|2|1.11|1|En pastillas|1

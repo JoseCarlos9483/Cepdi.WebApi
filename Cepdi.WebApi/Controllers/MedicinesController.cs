@@ -27,6 +27,12 @@ namespace Cepdi.WebApi.Controllers
             this._medicinesBusiness = medicinesBusiness;
         }
 
+        /// <summary>
+        /// Obtiene los registros para la tabla
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="record"></param>
+        /// <returns></returns>
         [HttpGet("{current}/{record}")]       
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,20 +40,33 @@ namespace Cepdi.WebApi.Controllers
             => await _medicinesBusiness.GetAll(new ShowTableMedicinesModel() { Currentpage = current, RecordPorPage = record });
 
         
-        // GET api/<MedicinesController>/5
+        /// <summary>
+        /// Obtiene un registro por identificador
+        /// </summary>
+        /// <param name="id">identificar del medicamento</param>
+        /// <returns>La informacion del medicamento</returns>
         [HttpGet("{id}")]
         public async Task<Response<MedicineDTo>> Get(int id)
         => await _medicinesBusiness.Get(id);
 
 
 
-        // POST api/<MedicinesController>
+        /// <summary>
+        /// Crea un nuevo medicamento
+        /// </summary>
+        /// <param name="model">La informacion para crear un medicamento</param>
+        /// <returns>Si se creo el medicamento</returns>
         [HttpPost]
         [Route("Create")]
         public async Task<Response<bool>> Post([FromBody] CreateMedicineModel model)
         => await _medicinesBusiness.Create(model);
 
-        // PUT api/<MedicinesController>/5
+        /// <summary>
+        /// Actualiza un medicamento
+        /// </summary>
+        /// <param name="id">Identificador del medicamento</param>
+        /// <param name="model">Modelo con la informacion del medicamento</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<Response<bool>> Put(int id, [FromBody] MedicineDTo model)
         {
@@ -55,7 +74,11 @@ namespace Cepdi.WebApi.Controllers
             return await _medicinesBusiness.Update(model);
         }
 
-        // DELETE api/<MedicinesController>/5
+        /// <summary>
+        /// Deshabilita un medicamento
+        /// </summary>
+        /// <param name="id">Identificador del medicamento</param>
+        /// <returns>Si deshabilito un medicamento </returns>
         [HttpDelete("{id}")]
         public async Task<Response<bool>> Delete(int id)
         => await _medicinesBusiness.Delete(id);

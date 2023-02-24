@@ -17,11 +17,10 @@ namespace Cepdi.Models.Interfaces.Medicines
         Task<MedicineModel> Get(int id);
 
         /// <summary>
-        /// Onbtiene los registros por paginacion
+        /// Obtiene los registros por paginacion
         /// </summary>
-        /// <param name="currentpage"></param>
-        /// <param name="recordPorPage"></param>
-        /// <returns></returns>
+        /// <param name="model">Modelo con el request</param>
+        /// <returns>los registros y el total</returns>
         Task<(int totalRecord, IEnumerable<MedicineModel> registers)> GetAll(ShowTableMedicinesModel model);
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿
+using Cepdi.Business.Jwt;
 using Cepdi.Business.Medicines;
 using Cepdi.Business.Pharmacies;
 using Cepdi.Business.Users;
@@ -22,6 +23,7 @@ namespace Cepdi.WebApi.Extensions
             services.AddScoped<IPharmaciesBussines, PharmaciesBussines>();
             services.AddScoped<IUsersData, UsersData>();
             services.AddScoped<IUsersBusiness, UsersBussines>();
+            services.AddSingleton<TokenService>();
         }
     }
 }
