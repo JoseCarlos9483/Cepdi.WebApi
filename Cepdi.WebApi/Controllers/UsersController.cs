@@ -24,8 +24,8 @@ namespace Cepdi.WebApi.Controllers
         /// <returns>Si tienen acceso</returns>
         [HttpPost]
         [Route("Login")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public Response<LoginResponse> Post([FromBody] LoginRequest value)
         {
            return _usersBusiness.Login(value);
